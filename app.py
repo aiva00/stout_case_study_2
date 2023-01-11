@@ -63,12 +63,16 @@ if pages=='Analysis' :
     # Revenue from new customers vs lost
     st.markdown('# Revenue from New Customers vs Lost from Attrition')
     st.markdown('The graph shows that new customers brought a lot more money to the company than the money that was lost from attrition')
+    options = st.multiselect(
+        label='Attributes for Visualization',
+        options=['New Customer Revenue', 'Revenue Lost from Attrition'],
+        default=['New Customer Revenue', 'Revenue Lost from Attrition'])
     df_plot = db.query_revenue_lost_vs_gained(db.df)
     fig = px.line(
         data_frame=df_plot,
         markers=True,
         x='Year',
-        y=['New Customer Revenue', 'Revenue Lost from Attrition'],
+        y=options,
         template='plotly_dark'
     )
     fig.update_layout(
@@ -86,12 +90,16 @@ if pages=='Analysis' :
     #New customers vs Lost Customers
     st.markdown('# New Customers vs Lost Customers')
     st.markdown('Despite 2017 being a year with a lot of profit for the company, it lost a lot more customers than it gained. Maybe though they followed a strategy of raising the prices with the cost of losing clients and it worked in the end.')
+    options = st.multiselect(
+        label='Attributes for Visualization',
+        options=['New Customers', 'Lost Customers'],
+        default=['New Customers', 'Lost Customers'])
     df_plot = db.query_new_vs_lost_customers(db.df)
     fig = px.line(
         data_frame=df_plot,
         markers=True,
         x='Year',
-        y=['New Customers', 'Lost Customers'],
+        y=options,
         template='plotly_dark',
         labels=['New Customers', 'Lost Customers']
     )
